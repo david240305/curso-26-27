@@ -16,8 +16,11 @@ jobs:
           node-version: '20'
           cache: 'npm'
 
-      - name: Instalar dependencias
-        run: npm ci
+      - name: Instalar dependencias del proyecto
+        run: npm ci --legacy-peer-deps
+
+      - name: Instalar validador de HTML explícitamente
+        run: npm install html-validate --save-dev --legacy-peer-deps
 
       - name: Crear carpeta y archivo CSS nativo
         run: |
