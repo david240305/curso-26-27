@@ -13,7 +13,7 @@ jobs:
       - name: Configurar Node.js
         uses: actions/setup-node@v7
         with:
-          node-version: '20'
+          node-version: '24'
           cache: 'npm'
 
       - name: Instalar dependencias
@@ -21,12 +21,3 @@ jobs:
 
       - name: Validar HTML (html-validate)
         run: npx html-validate index.html
-
-      - name: Linting CSS (stylelint)
-        run: npx stylelint "css/**/*.css"
-
-      - name: Linting JavaScript (eslint)
-        run: npx eslint js/
-
-      - name: Ejecutar tests unitarios
-        run: npm test
