@@ -1,0 +1,11 @@
+name: CI Validar y Testear
+
+on:
+  workflow_dispatch:
+
+jobs:
+  lint-and-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v7
