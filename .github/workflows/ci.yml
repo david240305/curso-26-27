@@ -24,7 +24,6 @@ jobs:
         run: npx html-validate index.html
     
       - name: Linting CSS (stylelint)
-        working-directory: ./despliegue
         run: npx stylelint "css/**/*.css"
 
       - name: Linting JavaScript (eslint)
