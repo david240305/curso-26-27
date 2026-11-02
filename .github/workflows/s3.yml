@@ -1,4 +1,4 @@
- name: Copia a S3
+name: Copia a S3
 
 on:
   push:
@@ -31,4 +31,5 @@ jobs:
 
       - name: Mostrar el contenido del bucket
         run: aws s3 ls s3://${{ secrets.S3_BUCKET }} --recursive
+
 
