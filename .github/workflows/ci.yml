@@ -13,11 +13,19 @@ jobs:
       - name: Configurar Node.js
         uses: actions/setup-node@v7
         with:
-          node-version: '24'
-          cache: 'npm'
+          node-version: '24'          
 
       - name: Instalar dependencias
+        working-directory: ./despliegue
         run: npm ci
 
       - name: Validar HTML (html-validate)
+        working-directory: ./despliegue
         run: npx html-validate index.html
+    
+      - name: Linting CSS (stylelint)
+        working-directory: ./despliegue
+        run: npx stylelint "css/**/*.css"
+
+      - name: Linting JavaScript (eslint)
+        run: npx eslint js/
