@@ -11,12 +11,13 @@ def crear_vpc():
 
   ec2.modify_vpc_attribute(VpcId=vpc_id, EnableDnsSupport={'Value': True})
   ec2.modify_vpc_attribute(VpcId=vpc_id, EnableDnsHostnames={'Value': True})
+
+  # --- AQUÍ ESTÁ EL CAMBIO: Clave 'tipo' y valor 'prueba' ---
   ec2.create_tags(
-      Resources=[vpc_id], 
+      Resources=[vpc_id],
       Tags=[
-     {'Key': 'Name', 'Value':'MiVPC-Boto3'},
-     {'Key': 'Proyecto', 'Value':'prueba'},
-      
+          {'Key': 'Name', 'Value': 'MiVPC-Boto3'},
+          {'Key': 'tipo', 'Value': 'prueba'},
       ],
   )
 
@@ -101,7 +102,7 @@ def crear_instancia_ec2(ec2, subnet_id, sg_id):
       InstanceType='t3.micro',
       SubnetId=subnet_id,
       SecurityGroupIds=[sg_id],
-      KeyName='vockey',  # --- Usamos el par de claves por defecto del laboratorio ---
+      KeyName='vockey',
       MinCount=1,
       MaxCount=1,
       TagSpecifications=[{
@@ -119,11 +120,5 @@ if __name__ == '__main__':
   ec2_client, vpc_id, route_table_id = crear_vpc()
   subnet_id = crear_subred(ec2_client, vpc_id, route_table_id)
   sg_id = crear_security_group(ec2_client, vpc_id)
-
-  # Lanzamos la instancia directamente con 'vockey'
   instancia_id = crear_instancia_ec2(ec2_client, subnet_id, sg_id)
-
-  print(
-      f'Despliegue finalizado. Instancia {instancia_id} creada usando la clave'
-      ' "vockey".'
-  )
+  print(f'Despliegue finalizado. Instancia {instancia_id} creada.')
